@@ -46,9 +46,14 @@ test('overrides fixture', async t => {
 });
 
 // https://github.com/sindresorhus/xo/issues/65
-test.failing('ignores fixture', async t => {
+test('ignores fixture', async t => {
 	const cwd = path.join(__dirname, 'fixtures/ignores');
 	await t.throws(main([], {cwd}));
+});
+
+test('use pattern', async t => {
+	const cwd = path.join(__dirname, 'fixtures/pattern');
+	await t.notThrows(main([], {cwd}));
 });
 
 test('ignore files in .gitignore', async t => {

@@ -88,10 +88,9 @@ exports.lintFiles = (patterns, opts) => {
 	opts = optionsManager.preprocess(opts);
 
 	const isEmptyPatterns = patterns.length === 0;
-	const defaultPattern = `**/*.{${opts.extensions.join(',')}}`;
 	const ignoreFilter = optionsManager.getGitIgnoreFilter(opts);
 
-	patterns = isEmptyPatterns ? [defaultPattern] : arrify(patterns);
+	patterns = isEmptyPatterns ? opts.patterns : arrify(patterns);
 
 	return globby(patterns, {ignore: opts.ignores, nodir: true, cwd: opts.cwd}).then(paths => {
 		// Filter out unwanted file extensions
